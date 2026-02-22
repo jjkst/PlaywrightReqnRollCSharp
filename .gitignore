@@ -4,3 +4,5 @@ Logs
 TestResults
 .vs
 *.user
+
+**/*.feature.cs

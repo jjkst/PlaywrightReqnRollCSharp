@@ -1,11 +1,10 @@
 using Microsoft.Playwright;
+using PlaywrightReqnRollCSharp.Support;
 
-namespace PlaywrightMSTests.PageObjects;
+namespace PlaywrightReqnRollCSharp.PageObjects;
 
-public class CartPage(IPage page)
+public class CartPage(PlaywrightContext context) : BasePage(context)
 {
-    private readonly IPage _page = page;
-
     private ILocator ShopCartLink => _page.Locator("[data-test='shopping-cart-link']");    
     private ILocator InventoryListNames => _page.Locator("[data-test='inventory-item-name']");
 

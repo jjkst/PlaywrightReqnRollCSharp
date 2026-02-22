@@ -1,10 +1,10 @@
 using Microsoft.Playwright;
+using PlaywrightReqnRollCSharp.Support;
 
-namespace PlaywrightMSTests.PageObjects;
+namespace PlaywrightReqnRollCSharp.PageObjects;
 
-public class CheckoutPage(IPage page)
+public class CheckoutPage(PlaywrightContext context) : BasePage(context)
 {
-    private readonly IPage _page = page;
     private ILocator FirstName => _page.Locator("[data-test='firstName']");
     private ILocator LastName => _page.Locator("[data-test='lastName']");
     private ILocator PostalCode => _page.Locator("[data-test='postalCode']");

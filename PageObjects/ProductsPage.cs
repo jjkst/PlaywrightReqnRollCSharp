@@ -1,10 +1,10 @@
 using Microsoft.Playwright;
+using PlaywrightReqnRollCSharp.Support;
 
-namespace PlaywrightMSTests.PageObjects;
+namespace PlaywrightReqnRollCSharp.PageObjects;
 
-public class ProductsPage(IPage page)
+public class ProductsPage(PlaywrightContext context) : BasePage(context)
 {
-    private readonly IPage _page = page;
     private ILocator Title => _page.Locator("[data-test='title']");
     private ILocator InventoryList => _page.Locator("[data-test='inventory-item']");
     private ILocator InventoryItemName => _page.Locator("[data-test='inventory-item-name']");

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PlaywrightMSTests.Support;
+namespace PlaywrightReqnRollCSharp.Support;
 
 public static class UserAccountManager
 {

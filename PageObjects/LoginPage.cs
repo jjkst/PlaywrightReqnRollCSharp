@@ -1,11 +1,11 @@
 using Microsoft.Playwright;
 using NLog.Layouts;
+using PlaywrightReqnRollCSharp.Support;
 
-namespace PlaywrightMSTests.PageObjects;
+namespace PlaywrightReqnRollCSharp.PageObjects;
 
-public class LoginPage(IPage page)
+public class LoginPage(PlaywrightContext context) : BasePage(context)
 {
-    private readonly IPage _page = page;
     private ILocator UsernameInput => _page.GetByRole(AriaRole.Textbox, new() { Name = "username" });
     private ILocator PasswordInput => _page.GetByRole(AriaRole.Textbox, new() { Name = "password" });
     private ILocator LoginButton => _page.GetByRole(AriaRole.Button, new() { Name = "Login" });

@@ -9,7 +9,7 @@
 	<TestRunParameters>
 		<Parameter name="Environment" value="Test" />
 		<Parameter name="Browser" value="Chrome" />
-		<Parameter name="HeadlessBrowser" value="true" />
+		<Parameter name="HeadlessBrowser" value="false" />
 		<Parameter name="Users" value="standard_user,performance_glitch_user,visual_user" />
 		<Parameter name="Password" value="secret_sauce" />
 	</TestRunParameters>

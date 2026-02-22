@@ -1,15 +1,21 @@
 ﻿using NLog;
 using NLog.Config;
 using NLog.Targets;
-using PlaywrightMSTests.Steps;
+using PlaywrightReqnRollCSharp.Steps;
 
-namespace PlaywrightMSTests.Support;
+namespace PlaywrightReqnRollCSharp.Support;
 
 public static class NLogTestConfig
 {
     public static void SetupNLog()
     {
         var config = new LoggingConfiguration();
+
+        var consoleTarget = new ConsoleTarget("logconsole")
+        {
+            Layout = "${longdate}|${level:uppercase=true}|${logger}|${message}"
+        };
+        config.AddTarget(consoleTarget);
 
         // Create a file target
         var fileTarget = new FileTarget("logfile")
@@ -19,9 +25,9 @@ public static class NLogTestConfig
         };
         config.AddTarget(fileTarget);
 
-        // Define a rule to send all log messages to the file target
-        var rule = new LoggingRule("*", LogLevel.Trace, fileTarget);
-        config.LoggingRules.Add(rule);
+        config.AddRule(LogLevel.Info, LogLevel.Fatal, consoleTarget);
+        config.AddRule(LogLevel.Info, LogLevel.Fatal, fileTarget);
+
 
         // Activate the configuration
         LogManager.Configuration = config;

@@ -1,21 +1,33 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <LangVersion>latest</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <RestoreSources>
+			https://api.nuget.org/v3/index.json;
+		</RestoreSources>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ExtentReports" Version="5.0.4" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
-    <PackageReference Include="Microsoft.Playwright.MSTest" Version="1.55.0" />
-    <PackageReference Include="MSTest.TestAdapter" Version="3.10.4" />
-    <PackageReference Include="MSTest.TestFramework" Version="3.10.4" />
-    <PackageReference Include="NLog" Version="6.0.4" />
-    <PackageReference Include="NLog.Extensions.Logging" Version="6.0.4" />
-    <PackageReference Include="Reqnroll.MsTest" Version="3.0.2" />
+  <!-- Reqnroll packages for hooks and step definition -->
+		<PackageReference Include="Reqnroll.MsTest" Version="3.2.1" />
+
+		<!-- MSTest Packages -->
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
+		<PackageReference Include="MSTest.TestAdapter" Version="4.0.2" />
+		<PackageReference Include="MSTest.TestFramework" Version="4.0.2" />
+
+		<!-- Playwright Packages -->
+		<PackageReference Include="Microsoft.Playwright.MSTest" Version="1.56.0" />
+
+		<!-- Reporting Packages -->
+		<PackageReference Include="ExtentReports" Version="5.0.4" />
+
+		<!-- Logging Packages -->
+		<PackageReference Include="NLog" Version="6.0.6" />
+		<PackageReference Include="NLog.Extensions.Logging" Version="6.1.0" />
   </ItemGroup>
 
 </Project>

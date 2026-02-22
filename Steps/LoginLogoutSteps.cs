@@ -1,40 +1,35 @@
 using Microsoft.Playwright;
 using NLog;
-using PlaywrightMSTests.PageObjects;
+using PlaywrightReqnRollCSharp.PageObjects;
+using PlaywrightReqnRollCSharp.Support;
 using Reqnroll;
 using System.Threading.Tasks;
 
-namespace PlaywrightMSTests.Steps
+namespace PlaywrightReqnRollCSharp.Steps;
+
+[Binding]
+public sealed class LoginLogoutSteps(PlaywrightContext page, ScenarioContext scenarioContext, LoginPage loginPage)
 {
-    [Binding]
-    public sealed class LoginLogoutSteps(ScenarioContext scenarioContext)
+    private static Logger Logger = LogManager.GetCurrentClassLogger();
+
+    [Given("Login to the application")]
+    public async Task GivenLoginToTheApplicationAsync()
     {
-        IPage _page = (IPage) scenarioContext["Page"];
-
-        private static Logger Logger = LogManager.GetCurrentClassLogger();
-
-        [Given("Login to the application")]
-        public async Task GivenLoginToTheApplicationAsync()
-        {
-
-            var page = new LoginPage(_page);
-            await page.Login(scenarioContext["CurrentUser"].ToString(), scenarioContext["Password"].ToString());
-        }
-
-        [When("Open menu and click on (.*)")]
-        public async Task WhenOpenMenuAndClickOnLink(string link)
-        {
-            var page = new LoginPage(_page);
-            await page.OpenMenu();
-            await page.ClickLink(link);
-        }
-
-        [Then("Validate user is logged out")]
-        public void ThenValidateUserIsLoggedOut()
-        {
-            var url = _page.Url;
-            Assert.AreEqual("https://www.saucedemo.com/", url);
-        }
-
+        await loginPage.Login(scenarioContext["CurrentUser"].ToString(), scenarioContext["Password"].ToString());
     }
+
+    [When("Open menu and click on (.*)")]
+    public async Task WhenOpenMenuAndClickOnLink(string link)
+    {
+        await loginPage.OpenMenu();
+        await loginPage.ClickLink(link);
+    }
+
+    [Then("Validate user is logged out")]
+    public void ThenValidateUserIsLoggedOut()
+    {
+        var url = page.CurrentPage.Url;
+        Assert.AreEqual("https://www.saucedemo.com/", url);
+    }
+
 }
