@@ -94,15 +94,12 @@ public sealed class Hooks(IObjectContainer objectContainer, FeatureContext featu
         ExtentTest featureTest = _extentReports.CreateTest<Feature>(featureTitle);
         _extentfeature.TryAdd(featureTitle, featureTest);
 
-        string user = UserAccountManager.GetUserAccount() ?? throw new Exception("No user accounts available.");
-        featureContext["CurrentUser"] = user;
-        Logger?.Info($"******* Feature: {featureTitle} is running with User: {user}");  
+        Logger?.Info($"******* Feature: {featureTitle} is starting");
     }
 
     [AfterFeature]
     public static void AfterFeature(FeatureContext featureContext)
     {
-        UserAccountManager.ReleaseUserAccount(featureContext["CurrentUser"].ToString());
         Logger.Info($"******* Feature: {featureContext.FeatureInfo.Title} is complete");
     }
 
@@ -184,6 +181,9 @@ public sealed class Hooks(IObjectContainer objectContainer, FeatureContext featu
         log.Append($@"ConsoleErrors: {string.Join("\n", _consoleErrors)}");
         Logger.Info(log);
         Logger.Info("**********************************************************");
+
+        UserAccountManager.ReleaseUserAccount(scenarioContext["CurrentUser"]?.ToString());
+
         if (featureContext.FeatureInfo.Tags.Contains("Backend")) return;
 
         var browser = objectContainer.Resolve<IBrowser>();

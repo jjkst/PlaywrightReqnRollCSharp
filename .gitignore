@@ -1,8 +1,14 @@
-bin
-obj
-Logs
-TestResults
-.vs
+# Build output
+bin/
+obj/
+
+# Test artifacts
+Logs/
+TestResults/
+
+# Visual Studio
+.vs/
 *.user
 
+# Reqnroll generated code-behind
 **/*.feature.cs
